@@ -8,12 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Button mDrinkButton;
     Toolbar mToolbar;
+    TextView mDrinkText;
     private boolean isDrinking = false;
 
     @Override
@@ -23,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mDrinkButton = (Button) findViewById(R.id.drinkButton);
-
+        mDrinkText = (TextView) findViewById(R.id.drinkText);
         mDrinkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Yo DrinkButton CLICKED!!!",Toast.LENGTH_SHORT).show();
                 isDrinking = !isDrinking;
                 DrinkService.setServiceAlarm(getApplicationContext(), isDrinking);
-
+                mDrinkText.setText("Drink alert: " + isDrinking);
             }
         });
     }
